@@ -1,5 +1,6 @@
 // Globals
 const TABLE_ELEMENTS = 8;
+const TIME_LIMIT = 40;
 let tableNumbers = [];
 let revealedCount = 0;
 let card1;
@@ -7,7 +8,24 @@ let card2;
 let valueCard1;
 let valueCard2;
 let matches = 0;
+let countdown;
+let isTimerOn = false;
+let timer = TIME_LIMIT;
+let totalMoves = 0;
+
+// Elements
+const buttons = document.querySelectorAll('.square-button button');
+const resetBtn = document.querySelector('#reset');
+const revealBtn = document.querySelector('#reveal');
 const matchesTxt = document.getElementById('matches');
+const timertxt = document.getElementById('timer');
+const totalMovestxt = document.getElementById('total-moves');
+const messagetxt = document.getElementById('message');
+
+// Default txts
+matchesTxt.innerHTML = `Aciertos: ${matches}`;
+totalMovestxt.innerHTML = `Movimientos: ${totalMoves}`;
+timertxt.innerHTML = `Tiempo restante: ${TIME_LIMIT} segundos`;
 
 // Functions
 function hide() {
@@ -18,16 +36,94 @@ function hide() {
 
 function match() {
   matches++;
-  console.log('Matches', matches);
-  matchesTxt.innerHTML = `Matches: ${matches}`;
+  console.log('Aciertos', matches);
+  matchesTxt.innerHTML = `Aciertos: ${matches}`;
   revealedCount = 0;
-  if (matches === TABLE_ELEMENTS) {
-    alert('You won!');
+
+  if (matches == TABLE_ELEMENTS) {
+    console.log('Win!');
+    clearInterval(countdown);
+
+    matchesTxt.innerHTML = `Aciertos: ${matches} 💯`;
+    totalMovestxt.innerHTML = `Movimientos: ${totalMoves} ♟️`;
+    messagetxt.innerHTML = `Increible! Solo tardaste ${
+      TIME_LIMIT - timer
+    }s en resolver el MemoTest! ⌛`;
   }
+}
+
+function handleReset(buttons) {
+  console.log('Reset!');
+  initializeGame();
+  clearInterval(countdown);
+  Array.from(buttons).map((button) => {
+    button.innerHTML = `  `;
+    button.disabled = false;
+  });
+
+  matches = 0;
+  revealedCount = 0;
+  totalMoves = 0;
+  timer = TIME_LIMIT;
+  isTimerOn = false;
+
+  matchesTxt.innerHTML = `Aciertos: ${matches}`;
+  totalMovestxt.innerHTML = `Movimientos: ${totalMoves}`;
+  timertxt.innerHTML = `Tiempo restante: ${timer} segundos`;
+}
+
+function handleRevealAll(buttons) {
+  console.log('Reveal All!');
+  Array.from(buttons).map((button, i) => {
+    button.innerHTML = `${tableNumbers[i]}`;
+    button.disabled = true;
+  });
+  clearInterval(countdown);
+  matches = TABLE_ELEMENTS;
+  revealedCount = 0;
+  totalMoves = 0;
+
+  matchesTxt.innerHTML = `Aciertos: ${TABLE_ELEMENTS}`;
+  totalMovestxt.innerHTML = `Movimientos: -`;
+}
+
+function startCountdown() {
+  countdown = setInterval(() => {
+    timer--;
+    timertxt.innerHTML = `Tiempo restante: ${timer} segundos`;
+
+    if (timer === 0) {
+      clearInterval(countdown);
+      handleRevealAll(buttons);
+      isTimerOn = false;
+    }
+  }, 1000);
+}
+
+/**
+ * Given the number of items to fit in the table
+ * It returns an array of randomized values in order to fill it.
+ */
+function initializeGame() {
+  let availableNumbers = [];
+  // Load the array with values between 1 and TABLE_ELEMENTS (Duplicated)
+  for (let i = 1; i <= TABLE_ELEMENTS; i++) {
+    availableNumbers.push(i);
+    availableNumbers.push(i);
+  }
+
+  // Sort randomly
+  tableNumbers = availableNumbers.sort(() => Math.random() - 0.5);
+  return tableNumbers;
 }
 
 function reveal(index) {
   revealedCount++;
+
+  if (!isTimerOn) {
+    startCountdown();
+    isTimerOn = true;
+  }
 
   if (revealedCount === 1) {
     card1 = document.getElementById(`button_${index}`);
@@ -43,61 +139,20 @@ function reveal(index) {
     if (valueCard1 === valueCard2) {
       match();
     } else {
+      totalMoves++;
+      totalMovestxt.innerHTML = `Movimientos: ${totalMoves}`;
       setTimeout(() => {
         hide();
-      }, 1000);
+      }, 700);
     }
     card1.disabled = false;
     card2.disabled = false;
   }
 }
 
-function handleReset(buttons) {
-  console.log('Reset!');
-  initializeGame();
-  Array.from(buttons).map((button) => {
-    button.innerHTML = `  `;
-    button.disabled = false;
-  });
-  matches = 0;
-}
-
-function handleRevealAll(buttons) {
-  console.log('Reveal All!');
-  Array.from(buttons).map((button, i) => {
-    button.innerHTML = `${tableNumbers[i]}`;
-    button.disabled = true;
-  });
-  matches = TABLE_ELEMENTS;
-}
-
-/**
- * Given the number of positions in the table
- * It returns an array of randomized values in order to fill the table.
- */
-function generateRandomNumbers() {
-  let availableNumbers = [];
-  for (let i = 1; i <= TABLE_ELEMENTS; i++) {
-    availableNumbers.push(i);
-    availableNumbers.push(i);
-  }
-
-  tableNumbers = availableNumbers.sort(() => Math.random() - 0.5);
-}
-
-function initializeGame() {
-  generateRandomNumbers();
-  console.log(tableNumbers);
-}
-
 // OnLoad
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM Loaded');
-
-  // Elements
-  const buttons = document.querySelectorAll('.square-button button');
-  const resetBtn = document.querySelector('#reset');
-  const revealBtn = document.querySelector('#reveal');
 
   // Add Event listeners
   buttons.forEach((button, index) => {
@@ -112,5 +167,6 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   console.log('Initializing game!');
-  initializeGame();
+  const table = initializeGame();
+  console.log(table);
 });
