@@ -4,49 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./resources/styles/style.css">
+  <link rel="shortcut icon" href="./resources/images/favicon.png" type="image/x-icon">
   <title>Memo Test</title>
 </head>
 <body>
-  <h1>Memotest</h1>
-  <section class="controls">
-    <button id="reset">Reset</button>
-    <button id="reveal">Reveal</button>
-  </section>
+  <header>
+    <h1>Memotest</h1>
+  </header>
+  <div class="game-information">
+    <img src="./resources/images/brain-logo.png" alt="">
+    <p class="description">
+      El Memotest, también conocido como juego de memoria o juego de pares, es un 
+      juego de mesa educativo diseñado para mejorar la memoria y la concentración.
+      <br><br>
+      El <span>objetivo</span> del juego es <span>encontrar todas las parejas de cartas idénticas</span> en el 
+      menor número de intentos posible y en el menor tiempo tambien!. <br><br>
+      <span>Tienes 40 segundos para encontrar todos los pares!</span>
+    </p>
+  </div>
+  <h3 class="theme">Seguridad vial</h3>
   <section class="game">
-    <table>
-      <tr>
-        <td><div class="square-button"><button id="button_0"></button></div></td>
-        <td><div class="square-button"><button id="button_1"></button></div></td>
-        <td><div class="square-button"><button id="button_2"></button></div></td>
-        <td><div class="square-button"><button id="button_3"></button></div></td>
-      </tr>
-      <tr>
-        <td><div class="square-button"><button id="button_4"></button></div></td>
-        <td><div class="square-button"><button id="button_5"></button></div></td>
-        <td><div class="square-button"><button id="button_6"></button></div></td>
-        <td><div class="square-button"><button id="button_7"></button></div></td>
-      </tr>
-      <tr>
-        <td><div class="square-button"><button id="button_8"></button></div></td>
-        <td><div class="square-button"><button id="button_9"></button></div></td>
-        <td><div class="square-button"><button id="button_10"></button></div></td>
-        <td><div class="square-button"><button id="button_11"></button></div></td>
-      </tr>
-      <tr>
-        <td><div class="square-button"><button id="button_12"></button></div></td>
-        <td><div class="square-button"><button id="button_13"></button></div></td>
-        <td><div class="square-button"><button id="button_14"></button></div></td>
-        <td><div class="square-button"><button id="button_15"></button></div></td>
-      </tr>
-    </table>
+    <div class="table">
+      <table>
+        <tr>
+          <td><div class="square-button"><button id="button_0"></button></div></td>
+          <td><div class="square-button"><button id="button_1"></button></div></td>
+          <td><div class="square-button"><button id="button_2"></button></div></td>
+          <td><div class="square-button"><button id="button_3"></button></div></td>
+        </tr>
+        <tr>
+          <td><div class="square-button"><button id="button_4"></button></div></td>
+          <td><div class="square-button"><button id="button_5"></button></div></td>
+          <td><div class="square-button"><button id="button_6"></button></div></td>
+          <td><div class="square-button"><button id="button_7"></button></div></td>
+        </tr>
+        <tr>
+          <td><div class="square-button"><button id="button_8"></button></div></td>
+          <td><div class="square-button"><button id="button_9"></button></div></td>
+          <td><div class="square-button"><button id="button_10"></button></div></td>
+          <td><div class="square-button"><button id="button_11"></button></div></td>
+        </tr>
+        <tr>
+          <td><div class="square-button"><button id="button_12"></button></div></td>
+          <td><div class="square-button"><button id="button_13"></button></div></td>
+          <td><div class="square-button"><button id="button_14"></button></div></td>
+          <td><div class="square-button"><button id="button_15"></button></div></td>
+        </tr>
+      </table>
+      <div class="controls">
+        <button id="reset">Reset</button>
+        <button id="reveal">Reveal</button>
+      </div>
+    </div>
+    <section class="information">
+      <p>Aciertos: <span id="matches"></span></p>
+      <p>Movimientos: <span id="total-moves"></span></p>
+      <p>Tiempo restante: <span id="timer"></span> segundos</p>
+      <br>
+      <p><span id="message"></span></p>
+    </section>
   </section>
-  <section class="information">
-    <p id="matches">Aciertos:</p>
-    <p id="total-moves">Movimientos:</p>
-    <p id="timer">Tiempo restante:</p>
-    <p id="message"></p>
-  </section>
-  
+  <footer class="footer-container">
+    <div class="top-row">
+      <img src="./resources/images/LogoUADE.png" alt="Logo UADE">
+      <h3>Diseño y desarrollo web - 2024</h3>
+      <h3>Equipo 10</h3>
+    </div>
+    <p>Derechos reservados - Sitio desarrollado para uso educativo</p>
+  </footer>
+    
   <script src="./resources/js/main.js"></script>
 </body>
 </html>
