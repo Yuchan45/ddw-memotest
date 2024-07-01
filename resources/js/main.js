@@ -143,6 +143,7 @@ function handleReset(buttons) {
   matchesTxt.innerHTML = `${matches}`;
   totalMovestxt.innerHTML = `${totalMoves}`;
   timertxt.innerHTML = `${timer}`;
+  messagetxt.innerHTML = '';
 }
 
 function handleRevealAll(buttons) {

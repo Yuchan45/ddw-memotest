@@ -118,7 +118,7 @@ body {
 }
 
 .game .information > h2 {
-  margin: 0;
+  margin: 25px 0 0;
   font-size: 1.5rem;
   font-weight: 600;
 }
