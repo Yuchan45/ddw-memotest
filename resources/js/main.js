@@ -1,6 +1,6 @@
 // Globals
 const TABLE_ELEMENTS = 8;
-const TIME_LIMIT = 40;
+const TIME_LIMIT = 400;
 let tableNumbers = [];
 let revealedCount = 0;
 let card1;
@@ -13,7 +13,60 @@ let isTimerOn = false;
 let timer = TIME_LIMIT;
 let totalMoves = 0;
 
+// Road Signs & Descriptions
+const roadSigns = [
+  {
+    id: 1,
+    name: 'Lomo de burro',
+    description:
+      'Señal que indica la presencia de una elevación en la calle que tiene el objetivo de reducir la velocidad de circulación de los vehículos.',
+  },
+  {
+    id: 2,
+    name: 'Camino Sinuoso',
+    description:
+      'Señal que indica que el camino más adelante es sinuoso y tiene una serie de curvas o vueltas. En todas las curvas baje la velocidad para tener un mejor control.',
+  },
+  {
+    id: 3,
+    name: 'Prohibido Giro en U',
+    description:
+      'Señal que indica que el conductor no debe hacer un giro de 180 grados o devolverse.',
+  },
+  {
+    id: 4,
+    name: 'Permitido Estacionar',
+    description:
+      'Señal que indica la presencia de una zona habilitada para el estacionamiento o aparcamiento de vehículos.',
+  },
+  {
+    id: 5,
+    name: 'Zona Escolar',
+    description:
+      'Señal que indica la existencia de instituciones educativas en una zona puntual. Debe bajarse la velocidad a 30 km/h para evitar accidentes y garantizar la seguridad de estudiantes, docentes y miembros de la comunidad educativa en general.',
+  },
+  {
+    id: 6,
+    name: 'STOP',
+    description:
+      'Señal que indica la obligación de detener el vehículo por completo antes de la señal y de la marca vial de detención.',
+  },
+  {
+    id: 7,
+    name: 'Derrumbe o Deslizamiento',
+    description:
+      'Señal que indica que estás por pasar por una zona de alto riesgo, en la cual, muy seguramente ya han habido derrumbes.',
+  },
+  {
+    id: 8,
+    name: 'Doble Sentido',
+    description:
+      'Señal que advierte a los conductores que circulan por una vía unidireccional que se aproxima a un tramo de vía sin separador central, en el cual la circulación se efectúa en los dos sentido.',
+  },
+];
+
 // Elements
+const roadInfoContainer = document.querySelector('.road-info');
 const buttons = document.querySelectorAll('.square-button button');
 const resetBtn = document.querySelector('#reset');
 const revealBtn = document.querySelector('#reveal');
@@ -34,11 +87,28 @@ function hide() {
   revealedCount = 0;
 }
 
-function match() {
+function addRoadItem(index) {
+  const roadSign = roadSigns.find((sign) => sign.id == index);
+  let roadItemHTML = `
+    <div class="road-item">
+      <img src="./resources/images/${index}.png" alt="">
+      <div class="item-info">
+        <h2>${roadSign.name}</h2>
+        <p>${roadSign.description}</p>
+      </div>
+    </div>
+  `;
+  roadInfoContainer.insertAdjacentHTML('beforeend', roadItemHTML);
+}
+
+function match(index) {
   matches++;
   console.log('Aciertos', matches);
   matchesTxt.innerHTML = `${matches}`;
   revealedCount = 0;
+
+  // Show the corresponding road Item description.
+  addRoadItem(index);
 
   if (matches == TABLE_ELEMENTS) {
     console.log('Win!');
@@ -61,6 +131,9 @@ function handleReset(buttons) {
     button.disabled = false;
   });
 
+  // Remove all road items descriptions
+  roadInfoContainer.innerHTML = '';
+
   matches = 0;
   revealedCount = 0;
   totalMoves = 0;
@@ -78,6 +151,11 @@ function handleRevealAll(buttons) {
     button.innerHTML = `<img src="./resources/images/${tableNumbers[i]}.png" alt="">`;
     button.disabled = true;
   });
+  // Reveal all road items descriptions
+  for (let i = 1; i <= 8; i++) {
+    addRoadItem(i);
+  }
+
   clearInterval(countdown);
   matches = TABLE_ELEMENTS;
   revealedCount = 0;
@@ -139,7 +217,7 @@ function reveal(index) {
     card2.disabled = true;
 
     if (valueCard1 === valueCard2) {
-      match();
+      match(valueCard2);
     } else {
       totalMoves++;
       totalMovestxt.innerHTML = `${totalMoves}`;
