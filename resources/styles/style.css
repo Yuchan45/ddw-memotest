@@ -29,30 +29,15 @@ body {
   background-color: var(--bg-white);
 }
 
-header {
-  padding: 0 20px;
-  height: 60px;
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  backdrop-filter: blur(5px);
-  z-index: 10;
-  top: 0;
-}
-
-header > h1 {
+.title {
   font-size: 1.5rem;
   font-weight: 800;
-  margin: 25px;
+  margin: 80px 25px 0;
 }
 
 
 .game-information {
   padding: 25px;
-  margin-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -224,6 +209,10 @@ td {
     margin-top: 80px;
   }
 
+  .title {
+    font-size: 4rem;
+  }
+
   .game-information {
     display: flex;
     flex-direction: row;
@@ -231,6 +220,7 @@ td {
     text-align: center;
     padding: 25px 150px;
     gap: 50px;
+    margin-top: 50px;
   }
 
   .game-information > p {
@@ -258,11 +248,12 @@ td {
   .game {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     gap: 20px;
     width: 100%;
     padding: 0 150px;
+    margin-top: 100px;
   }
 
   .game .controls {

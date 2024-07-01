@@ -3,14 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./resources/styles/nav.css">
   <link rel="stylesheet" href="./resources/styles/style.css">
   <link rel="shortcut icon" href="./resources/images/favicon.png" type="image/x-icon">
   <title>Memo Test</title>
 </head>
 <body>
-  <header>
-    <h1>Memotest</h1>
-  </header>
+  <div class="nav-bar-container">
+    <div class="nav-left">
+      <img src="./resources/images/logo-corazon-seguridad.png" alt="top-left-logo" srcset="">
+    </div>
+    <ul class="nav-right">
+      <li><a href="https://yuchan45.github.io/ddw-tp-equipo10/index.html#banner">Inicio</a></li>
+      <li><a href="https://yuchan45.github.io/ddw-tp-equipo10/index.html#goal">Objetivo</a></li>
+      <li><a href="https://yuchan45.github.io/ddw-tp-equipo10/views/integrantes.html">Integrantes</a></li>
+      <li><a href="https://yuchan45.github.io/ddw-tp-equipo10/views/avances.html">Avances</a></li>
+      <li><a href="https://yuchan45.github.io/ddw-tp-equipo10/views/juegos.html">Juegos</a></li>
+    </ul>
+    <div class="menu-btns">
+      <i class="fa-bars fa" id="menu"></i>
+      <!-- <i class="fa fa-close" id="close"></i> -->
+    </div>
+  </div>
+  <div class="menu-overlay hidden-menu">
+    <ul class="items">
+      <li><a href="https://yuchan45.github.io/ddw-tp-equipo10/index.html#banner">Inicio</a></li>
+      <li><a href="https://yuchan45.github.io/ddw-tp-equipo10/index.html#goal">Objetivo</a></li>
+      <li><a href="https://yuchan45.github.io/ddw-tp-equipo10/views/integrantes.html">Integrantes</a></li>
+      <li><a href="https://yuchan45.github.io/ddw-tp-equipo10/views/avances.html">Avances</a></li>
+      <li><a href="https://yuchan45.github.io/ddw-tp-equipo10/views/juegos.html">Juegos</a></li>
+    </ul>
+  </div>
+  <h1 class="title">Memotest</h1>
   <div class="game-information">
     <img src="./resources/images/brain-logo.png" alt="">
     <p class="description">
@@ -22,7 +47,7 @@
       <span>Tienes 40 segundos para encontrar todos los pares!</span>
     </p>
   </div>
-  <h3 class="theme">Seguridad vial</h3>
+  <!-- <h3 class="theme">Seguridad vial</h3> -->
   <section class="game">
     <div class="table">
       <table>
@@ -63,6 +88,9 @@
       <br>
       <p><span id="message"></span></p>
     </section>
+    <section class="traffic-info">
+
+    </section>
   </section>
   <footer class="footer-container">
     <div class="top-row">
@@ -73,6 +101,7 @@
     <p>Derechos reservados - Sitio desarrollado para uso educativo</p>
   </footer>
     
+  <script src="./resources/js/navBehaviour.js"></script>
   <script src="./resources/js/main.js"></script>
 </body>
 </html>

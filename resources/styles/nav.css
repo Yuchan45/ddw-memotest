@@ -1,0 +1,146 @@
+:root {
+  --bg-white: #F6F6F6;
+  --white: #FFF;
+  --blue: #009EDF;
+  --yellow: #FCC31E;
+  --red: #FF232B;
+  --black: #535353;
+  --deep-black: #22262A;
+}
+
+/**** Nav Bar ****/
+.nav-bar-container {
+  top: 0;
+  padding: 0 20px;
+  height: 60px;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  backdrop-filter: blur(5px);
+  z-index: 10;
+  background-color: none;
+}
+
+.nav-bar-container .nav-left {
+  
+}
+
+.nav-bar-container .nav-left > img {
+  /* width: 80px; */
+  width: 60px;
+}
+
+.nav-bar-container .nav-right {
+  display: none;
+}
+
+.nav-bar-container .nav-right li > a {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--black);
+  text-decoration: none;
+  transition: all ease .1s;
+}
+
+.nav-bar-container .nav-right li > a:hover {
+  color: var(--blue);
+}
+
+.nav-bar-container .menu-btns {
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.close-icon {
+  color: var(--red);
+}
+
+.nav-bar-container .menu-btns :nth-child(1) {
+  
+}
+
+.nav-bar-container .menu-btns :nth-child(2) {
+  display: none;
+}
+
+
+/**** Menu Overlay ****/
+.menu-overlay {
+  top: 0;
+  display: none;
+  transition: all ease .2s;
+}
+
+.hidden-menu {
+  position: fixed;
+  z-index: 5;
+  width: 100vw;
+  height: 100%;
+  background-color: var(--black);
+  display: flex !important;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  translate: -100vw;
+}
+
+.active-menu {
+  position: fixed;
+  z-index: 5;
+  width: 100vw;
+  height: 100%;
+  background-color: var(--deep-black);
+  display: flex !important;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-overlay .items {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.menu-overlay .items > li > a {
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.menu-overlay .items > li > a:hover {
+  color: var(--blue);
+}
+
+
+@media only screen and (min-width: 768px) {
+
+  /* NavBar */
+  .nav-bar-container {
+    padding: 0 150px;
+    height: 80px;
+  }
+  .nav-bar-container .nav-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
+  }
+  .nav-bar-container .nav-right li > a {
+    font-weight: 600;
+  }
+  .nav-bar-container .menu-btns {
+    display: none;
+  }
+
+}
